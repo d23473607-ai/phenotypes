@@ -68,20 +68,32 @@ async function analyze() {
           ${a[0][i]}% similarity
         </div>
       </div>`;
-    }
-    for (const arr of a[aLen-1]) {
-      console.log(`    ${arr[0]}: ${arr[i]}%`);
-      resultsContainer.innerHTML +=
-     `<div>
-        <img src="faces_lowres/${arr[0].toLowerCase()}${sex}.jpg" style="margin-left: 30px">
-        <div>
-          <a href="http://humanphenotypes.net/${arr[0]}.html"><h3>${arr[0]}</h3></a>
-          ${arr[i]}% similarity
-        </div>
-      </div>`;
-    }
-  }
+    let principal = a[0]; 
+let influenta = a[1]; 
+
+let htmlOutput = `
+  <div style="background: #1e1e1e; border: 2px solid #4CAF50; padding: 20px; border-radius: 10px; text-align: center; margin-bottom: 20px;">
+    <h2 style="color: #4CAF50; margin: 0 0 10px 0;">Synthetic Result</h2>
+    <p style="font-size: 22px; color: #ffffff; font-weight: bold;">
+      ${principal[0]} with ${influenta[0]} influence
+    </p>
+    <p style="color: #aaaaaa; font-size: 14px;">
+      Primary similarity: ${principal[1]}% (Secondary: ${influenta[1]}%)
+    </p>
+  </div>
+  
+  <h3 style="color: #ffffff; text-align: left;">Other detected influences:</h3>
+`;
+
+for (let i = 2; i < a.length; i++) {
+  htmlOutput += `
+    <div style="font-size: 14px; color: #cccccc; padding: 5px 0; border-bottom: 1px solid #333;">
+      ${a[i][0]} — ${a[i][1]}%
+    </div>
+  `;
 }
+
+resultsContainer.innerHTML = htmlOutput;
 
 document.getElementById('imgInp').onchange = async function() {
   const [file] = this.files;
