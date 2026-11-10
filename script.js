@@ -68,7 +68,7 @@ async function analyze() {
           ${a[0][i]}% similarity
         </div>
       </div>`;
-    let principal = a[0]; 
+let principal = a[0]; 
 let influenta = a[1]; 
 
 let htmlOutput = `
@@ -94,6 +94,7 @@ for (let i = 2; i < a.length; i++) {
 }
 
 resultsContainer.innerHTML = htmlOutput;
+
 
 document.getElementById('imgInp').onchange = async function() {
   const [file] = this.files;
